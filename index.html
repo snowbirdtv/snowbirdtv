@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8">
+    <title>SNOWBIRD TV</title>
+    <style>
+      html{height:100%;margin:0;padding:0;}
+      body{background-color:#000;font-family:Arial,Helvetica,sans-serif;margin:0;padding:0;min-height:100vh;overflow:hidden;}
+      #header{background:url('https://c0.wallpaperflare.com/preview/742/406/570/ice-rink-background-sports.jpg');background-size:cover;padding:5px 10px;position:relative;}
+      #header>h1{display:inline-block;margin:0;font-size:20px;}
+      #header>label{float:right;}
+      #player-container{height:100%;}
+      #player-banner{color:#fff;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;}
+      #player{height:100%;width:100%;}
+    </style>
+    <script type="text/javascript">
+      window.onResize = () => {
+        const windowHeight = window.innerHeight;
+        const headerHeight = document.getElementById("header").offsetHeight;
+        document.getElementById("player-container").style.height = `${windowHeight - headerHeight}px`;
+      };
+      window.onChannelSelection = () => {
+        const $channel_selection = document.getElementById("channel_selection");
+        const $player = document.getElementById("player");
+        const $banner = document.getElementById("player-banner");
+        if ($channel_selection.value) {
+          // Remove banner
+          if ($banner) $banner.remove();
+          // Start channel
+          $player.src = `https://daddylivehd.sx/embed/stream-${$channel_selection.value}.php`;
+        }
+      };
+      window.addEventListener("resize", onResize);
+      window.addEventListener("load", onResize);
+    </script>
+  </head>
+  <body>
+    <div id="header">
+      <h1>SNOWBIRD TV</h1>
+      <label>Channel:
+        <select id="channel_selection" onchange="onChannelSelection()">
+          <option value="">None</option>
+          <option value="318">Golf Channel</option>
+          <option value="406">Sportsnet Ontario</option>
+          <option value="407">Sportsnet West</option>
+          <option value="408">Sportsnet East</option>
+          <option value="409">Sportsnet 360</option>
+          <option value="410">Sportsnet World</option>
+          <option value="411">Sportsnet One</option>
+          <option value="422">SuperSport Golf</option>
+          <option value="111">TSN 1</option>
+          <option value="112">TSN 2</option>
+          <option value="113">TSN 3</option>
+          <option value="114">TSN 4</option>
+          <option value="115">TSN 5</option>
+        </select>
+      </label>
+    </div>
+    <div id="player-container">
+      <div id="player-banner">
+        <strong style="font-size:28px;">SPORTZ FOR DA SNOWBIRDZ</strong>
+        <br/>
+        <span style="font-size:16px;font-style:italic;">(just select a channel from the top right corner)</span>
+      </div>
+      <iframe id="player" class="video responsive" marginheight="0" marginwidth="0" scrolling="no" allowfullscreen="yes" width="100%" height="100%" frameborder="0">Your Browser Do not Support Iframe</iframe>
+    </div>
+  </body>
+</html>
